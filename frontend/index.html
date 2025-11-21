@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>CRUD TAREFAS</title>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>LISTA DE TAREFAS</h1>
+    <div class="formulario-tarefas">
+      <form action="">
+
+        <label for="tarefa">Nome da Tarefa:</label>
+        <input type="text" id="nome_tarefa" name="tarefa" required>
+
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao_tarefa" name="descricao_tarefa" rows="4" required></textarea>
+
+        <button type="submit">Adicionar Tarefa</button>
+
+      </form>
+    </div>
+    <div class="lista-tarefas">
+      <h2>MINHAS TAREFAS:</h2>
+      <ul>
+      </ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+Serviço	URL
+Frontend	http://localhost:3000
+Backend (API PHP)	http://localhost:8000
+phpMyAdmin	http://localhost:8080
+MySQL	localhost:3306

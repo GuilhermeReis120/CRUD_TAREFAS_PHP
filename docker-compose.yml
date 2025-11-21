@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+
+  backend:
+    build: ./backend
+    container_name: backend_CRUD_TAREFAS_APP_API
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend:/var/www/html
+    depends_on:
+      - db
+
+  frontend:
+    image: nginx:alpine
+    container_name: frontend_CRUD_TAREFAS_APP_API
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+
+  db:
+    image: mysql:8.0
+    container_name: DB_CRUD_TAREFAS_APP_API
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: todo_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin_CRUD_TAREFAS_APP_API
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:
