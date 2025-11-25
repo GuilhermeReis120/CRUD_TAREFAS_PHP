@@ -5,20 +5,21 @@
     private $pass = "user123";
     private $dbname = "todo_db";
     private $port = "3306";
+    private $conn;
 
     public function connect_db() {
-
-      $mysqli = new mysqli($this->host, $this->user, $this->pass, $this->dbname, $this->port);
-
-      if ($mysqli->connect_errno) {
-        http_response_code(500);
-        echo json_encode(["error" => "Erro ao conectar o banco: " . $mysqli->connect_error]);
-        exit;
-        }
+      $dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->dbname};charset=utf8mb4";
       
-      $mysqli->set_charset("utf8mb4");
-
-      return $mysqli;
+      try {
+        $this->conn = new PDO($dsn, $this->user, $this->pass);
+        
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $this->conn;
+      } catch(PDOException $e) {
+        http_response_code(500);
+        echo json_encode(["error" => "Erro ao conectar o banco: " . $e->getMessage()]);
+        exit;
+      }
     }
   }
 ?>
