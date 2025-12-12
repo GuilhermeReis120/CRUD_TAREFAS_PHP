@@ -12,7 +12,7 @@
   $partes = array_values(array_filter(explode('/', $path)));
 
   if (count($partes) == 0 || $partes[0] === '' && $method === 'GET'){
-    echo json_encode(["menssagem" => "API de Tarefas Funcionando"]);
+    echo json_encode(["menssagem" => "API Tarefas Funcionando"]);
     exit;
   }
   
