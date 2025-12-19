@@ -32,7 +32,7 @@
   if(count($partes) === 2 && is_numeric($partes[1])){
     $id = (int)$partes[1];
     if($method === 'PUT'){
-      $controller->atualizar();
+      $controller->atualizar($id);
     } elseif ($method === 'DELETE'){
       $controller->deletar($id);
     }

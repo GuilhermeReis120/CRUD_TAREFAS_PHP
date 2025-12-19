@@ -3,3 +3,15 @@ Frontend	http://localhost:3000
 Backend (API PHP)	http://localhost:8000
 phpMyAdmin	http://localhost:8080
 MySQL	localhost:3306
+
+
+### SQL DA TABELA DO PROJETO
+CREATE TABLE IF NOT EXISTS tarefas (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  titulo VARCHAR(255) NOT NULL,
+  descricao TEXT,
+  status ENUM('pendente','concluida') NOT NULL DEFAULT 'pendente',
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -29,7 +29,7 @@ async function excluirTarefa(id) {
 
 async function alternarStatus(tarefa) {
 
-  const novoStatus = tarefa.status === 'pendente' ? 'completa' : 'pendente';
+  const novoStatus = tarefa.status === 'pendente' ? 'concluida' : 'pendente';
 
   const tarefaAtualizada = {
     id: tarefa.id, 
@@ -72,9 +72,9 @@ async function carregarTarefas() {
       tarefas.forEach(tarefa => {
         const li = document.createElement('li');
         
-        li.className = tarefa.status === 'completa' ? 'completa' : ''; 
+        li.className = tarefa.status === 'concluida' ? 'concluida' : ''; 
         
-        const statusButtonText = tarefa.status === 'pendente' ? 'Marcar como Completa' : 'Marcar como Pendente';
+        const statusButtonText = tarefa.status === 'pendente' ? 'Marcar como Concluída' : 'Marcar como Pendente';
 
         li.innerHTML = `
           <div class="tarefa-conteudo">

@@ -24,7 +24,7 @@ class Tarefa{
 
   public function criar_tarefas()
   {
-    $sql = $sql = "INSERT INTO " . $this -> table . " (titulo, descricao, status) VALUES (:titulo, :descricao, :status)";
+    $sql = "INSERT INTO " . $this -> table . " (titulo, descricao, status) VALUES (:titulo, :descricao, :status)";
     $stmt = $this->conexao->prepare($sql);
     return $stmt->execute([
       ':titulo' => $this->titulo,

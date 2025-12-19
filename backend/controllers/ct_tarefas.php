@@ -37,22 +37,38 @@ class TarefasController
     }
   }
 
-  public function atualizar()
+  public function atualizar($id = null)
   {
+    header('Content-Type: application/json; charset=utf-8');
     $entrada = json_decode(file_get_contents('php://input'), true);
 
+    if ($id === null) {
+      $id = isset($entrada['id']) ? (int)$entrada['id'] : null;
+    }
+
+    if (!is_numeric($id)) {
+      http_response_code(400);
+      echo json_encode(['error' => 'ID inválido']);
+      return;
+    }
+
     $tarefa = new Tarefa($this->db);
-    $tarefa->id = $entrada['id'];
-    $tarefa->titulo = $entrada['titulo'];
-    $tarefa->descricao = $entrada['descricao'];
-    $tarefa->status = $entrada['status'];
+    $tarefa->id = (int)$id;
+    $tarefa->titulo = isset($entrada['titulo']) ? $entrada['titulo'] : null;
+    $tarefa->descricao = isset($entrada['descricao']) ? $entrada['descricao'] : null;
+    $tarefa->status = isset($entrada['status']) ? $entrada['status'] : null;
 
-    if ($tarefa->atualizar_tarefas()) {
-
-      echo json_encode(array("mensagem" => "Tarefa atualizada com sucesso."));
-    } else {
-
-      echo json_encode(array("mensagem" => "Não foi possível atualizar a tarefa."));
+    try {
+      if ($tarefa->atualizar_tarefas()) {
+        http_response_code(200);
+        echo json_encode(['success' => true, 'message' => 'Tarefa atualizada']);
+      } else {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'message' => 'Não foi possível atualizar']);
+      }
+    } catch (PDOException $e) {
+      http_response_code(500);
+      echo json_encode(['error' => $e->getMessage()]);
     }
   }
 
